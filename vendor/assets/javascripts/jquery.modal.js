@@ -147,10 +147,10 @@
     center: function() {
       this.$elm.css({
         position: 'fixed',
-        top: "50%",
-        left: "50%",
-        marginTop: - (this.$elm.outerHeight() / 2),
-        marginLeft: - (this.$elm.outerWidth() / 2),
+        top: "10%",
+        left: "10%",
+        width: "80%",
+        height: "80%",
         zIndex: this.options.zIndex + 1
       });
     },
