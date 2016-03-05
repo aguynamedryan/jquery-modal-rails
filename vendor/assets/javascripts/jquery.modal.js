@@ -68,9 +68,13 @@
     },
 
     close: function() {
-      this.unblock();
-      this.hide();
-      $(document).off('keydown.modal');
+      if (!(this.options.checkBeforeClose) || this.options.checkBeforeClose()) {
+        this.unblock();
+        this.hide();
+        $(document).off('keydown.modal');
+        return true;
+      }
+      return false;
     },
 
     block: function() {
@@ -167,10 +171,11 @@
   $.modal.close = function(event) {
     if (!current) return;
     if (event) event.preventDefault();
-    current.close();
-    var that = current.$elm;
-    current = null;
-    return that;
+    if (current.close()) {
+      var that = current.$elm;
+      current = null;
+      return that;
+    }
   };
 
   $.modal.resize = function() {
